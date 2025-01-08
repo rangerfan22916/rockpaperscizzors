@@ -16,7 +16,10 @@
         <!-- Welcome Section -->
         <div id="welcome-section" class="mb-3">
             <p class="mb-2">Enter your name:</p>
-            <input type="text" id="user-name" class="form-control mb-2" placeholder="Your Name">
+            <div class="d-flex justify-content-center mb-2">
+                <input type="text" id="user-name" class="form-control" placeholder="Your Name"
+                    style="max-width: 300px; font-size: 0.9rem;">
+            </div>
             <button class="btn btn-warning" id="start-game">Start Game</button>
         </div>
 
@@ -40,11 +43,12 @@
 
             <!-- Results -->
             <div class="row">
-                <div class="col-6"></div>
-                <p>You chose: <span id="user-choice" class="text-info"></span></p>
-            </div>
-            <div class="col-6">
-                <p>Computer chose: <span id="computer-choice" class="text-warning"></span></p>
+                <div class="col-6">
+                    <p>You chose: <span id="user-choice" class="text-info"></span></p>
+                </div>
+                <div class="col-6">
+                    <p>Computer chose: <span id="computer-choice" class="text-warning"></span></p>
+                </div>
             </div>
         </div>
         <p class="fs-5"><strong id="round-winner"></strong></p>
@@ -63,10 +67,7 @@
     <!-- Final Message Section -->
     <div id="final-section" class="d-none text-center">
         <button class="btn btn-warning mb-3" id="reset-game">Play Again</button>
-        <img id="final-image" src="32sy24n.jpeg" alt="Final Image" class="img-fluid">
     </div>
-
-
 
     <script src="script.js"></script>
 </body>

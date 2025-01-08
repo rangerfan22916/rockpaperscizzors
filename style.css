@@ -33,3 +33,18 @@ button:focus {
     outline: none !important;
     box-shadow: 0 0 10px rgba(255, 193, 7, 0.8);
 }
+
+/* Styling for the scores */
+.text-success, .text-danger {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.text-success {
+    color: #28a745;
+}
+
+.text-danger {
+    color: #dc3545;
+}
