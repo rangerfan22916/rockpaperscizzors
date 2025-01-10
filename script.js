@@ -1,93 +1,107 @@
-const userNameInput = document.getElementById("user-name");
-const startGameButton = document.getElementById("start-game");
-const welcomeSection = document.getElementById("welcome-section");
-const gameSection = document.getElementById("game-section");
-const playerNameDisplay = document.getElementById("player-name");
-const currentRoundDisplay = document.getElementById("current-round");
-const userChoiceDisplay = document.getElementById("user-choice");
-const computerChoiceDisplay = document.getElementById("computer-choice");
-const roundWinnerDisplay = document.getElementById("round-winner");
-const userScoreDisplay = document.getElementById("user-score");
-const computerScoreDisplay = document.getElementById("computer-score");
-const finalSection = document.getElementById("final-section");
-const resetGameButton = document.getElementById("reset-game");
-
-let currentRound = 1;
 let userScore = 0;
 let computerScore = 0;
+let round = 1;
 
-const choices = ["rock", "paper", "scissors"];
+document.getElementById("start-game").addEventListener("click", startGame);
+document.getElementById("reset-game").addEventListener("click", resetGame);
 
-function getComputerChoice() {
-  return choices[Math.floor(Math.random() * choices.length)];
+function startGame() {
+  document.getElementById("welcome-section").classList.add("d-none");
+  document.getElementById("game-section").classList.remove("d-none");
+  document.getElementById("final-section").classList.add("d-none");
+  resetGame();
 }
 
-function determineWinner(userChoice, computerChoice) {
-  if (userChoice === computerChoice) return "tie";
-  if (
-    (userChoice === "rock" && computerChoice === "scissors") ||
-    (userChoice === "paper" && computerChoice === "rock") ||
-    (userChoice === "scissors" && computerChoice === "paper")
-  )
-    return "user";
+function resetGame() {
+  userScore = 0;
+  computerScore = 0;
+  round = 1;
+
+  document.getElementById("user-score").textContent = userScore;
+  document.getElementById("computer-score").textContent = computerScore;
+  document.getElementById("current-round").textContent = round;
+  document.getElementById("round-winner").textContent = "";
+
+  document.getElementById("user-name").value = ""; // Reset the name input
+  document.getElementById("player-name").textContent = "";
+}
+
+function playRound(userChoice) {
+  if (round > 5) {
+    document.getElementById("game-section").classList.add("d-none");
+    document.getElementById("final-section").classList.remove("d-none");
+    return;
+  }
+
+  const computerChoice = getComputerChoice();
+  const roundWinner = getRoundWinner(userChoice, computerChoice);
+
+  if (roundWinner === "user") {
+    userScore++;
+    document.getElementById("round-winner").textContent = "You win this round!";
+  } else if (roundWinner === "computer") {
+    computerScore++;
+    document.getElementById("round-winner").textContent =
+      "Computer wins this round!";
+  } else {
+    document.getElementById("round-winner").textContent = "It's a draw!";
+  }
+
+  round++;
+  document.getElementById("current-round").textContent = round;
+  document.getElementById("user-score").textContent = userScore;
+  document.getElementById("computer-score").textContent = computerScore;
+
+  document.getElementById("user-choice").textContent = userChoice;
+  document.getElementById("computer-choice").textContent = computerChoice;
+}
+
+function getComputerChoice() {
+  let computerChoice = Math.random();
+  if (computerChoice < 0.33) {
+    return "rock";
+  } else if (computerChoice < 0.66) {
+    return "paper";
+  } else {
+    return "scissors";
+  }
+}
+
+function getRoundWinner(userChoice, computerChoice) {
+  if (userChoice === computerChoice) {
+    return "draw";
+  }
+
+  if (userChoice === "rock") {
+    if (computerChoice === "scissors") {
+      return "user";
+    } else {
+      return "computer";
+    }
+  }
+
+  if (userChoice === "paper") {
+    if (computerChoice === "rock") {
+      return "user";
+    } else {
+      return "computer";
+    }
+  }
+
+  if (userChoice === "scissors") {
+    if (computerChoice === "paper") {
+      return "user";
+    } else {
+      return "computer";
+    }
+  }
+
   return "computer";
 }
 
-startGameButton.addEventListener("click", () => {
-  const userName = userNameInput.value.trim();
-  if (!userName) {
-    alert("Please enter your name!");
-    return;
-  }
-  playerNameDisplay.textContent = userName;
-  welcomeSection.classList.add("d-none");
-  gameSection.classList.remove("d-none");
-  currentRoundDisplay.textContent = currentRound;
-});
-
 document.querySelectorAll(".choice-btn").forEach((button) => {
-  button.addEventListener("click", () => {
-    if (currentRound > 5) return;
-
-    const userChoice = button.dataset.choice;
-    const computerChoice = getComputerChoice();
-
-    userChoiceDisplay.textContent = userChoice;
-    computerChoiceDisplay.textContent = computerChoice;
-
-    const winner = determineWinner(userChoice, computerChoice);
-    if (winner === "user") {
-      userScore++;
-      roundWinnerDisplay.textContent = "You win this round!";
-    } else if (winner === "computer") {
-      computerScore++;
-      roundWinnerDisplay.textContent = "Computer wins this round!";
-    } else {
-      roundWinnerDisplay.textContent = "It's a tie!";
-    }
-
-    userScoreDisplay.textContent = userScore;
-    computerScoreDisplay.textContent = computerScore;
-
-    currentRoundDisplay.textContent = ++currentRound;
-
-    if (currentRound > 5) {
-      gameSection.classList.add("d-none");
-      finalSection.classList.remove("d-none");
-    }
+  button.addEventListener("click", (e) => {
+    const userChoice = e.target.getAttribute("data-choice");
+    playRound(userChoice);
   });
-});
-
-resetGameButton.addEventListener("click", () => {
-  userScore = 0;
-  computerScore = 0;
-  currentRound = 1;
-  userScoreDisplay.textContent = userScore;
-  computerScoreDisplay.textContent = computerScore;
-  currentRoundDisplay.textContent = currentRound;
-  roundWinnerDisplay.textContent = "";
-
-  finalSection.classList.add("d-none");
-  welcomeSection.classList.remove("d-none");
-  gameSection.classList.add("d-none");
 });

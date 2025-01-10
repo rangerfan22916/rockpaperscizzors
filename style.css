@@ -1,28 +1,37 @@
 body {
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.9rem;
+    font-family: 'Pangolin', sans-serif;
+    font-size: 1.5rem;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #212121;
+    margin: 0;
 }
 
 h1, h2 {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    margin-bottom: 30px;
 }
 
 .choice-btn {
-    font-size: 1.8rem;
-    padding: 10px;
+    font-size: 3rem;
+    padding: 20px;
     margin: 0 auto;
+    width: 80%;
 }
 
 #game-section p, #welcome-section p {
-    font-size: 0.85rem;
-    margin-bottom: 5px;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
 }
 
 .container {
-    max-width: 100%;
-    height: 100%;
+    text-align: center;
+    max-width: 90%;
+    width: 700px;
 }
 
 .row > div {
@@ -34,17 +43,57 @@ button:focus {
     box-shadow: 0 0 10px rgba(255, 193, 7, 0.8);
 }
 
-/* Styling for the scores */
-.text-success, .text-danger {
+#welcome-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#user-name {
+    width: 85%; 
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    padding: 15px;
+}
+
+#user-score-text, #computer-score-text {
     font-weight: bold;
-    font-size: 1.2rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-.text-success {
-    color: #28a745;
+#player-name {
+    font-family: 'Pangolin', sans-serif;
+    font-size: 2rem;
+    color: #1e90ff;
 }
 
-.text-danger {
-    color: #dc3545;
+#round-winner {
+    font-family: 'Pangolin', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+#final-section button {
+    font-size: 2rem;
+    padding: 20px;
+    width: 60%;
+}
+
+#start-game {
+    font-size: 1.3rem;
+    padding: 12px 24px;
+}
+
+
+.choice-btn {
+    font-size: 2.2rem;
+    padding: 15px;
+}
+
+#reset-game {
+    width: 400px;
 }
